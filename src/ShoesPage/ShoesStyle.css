@@ -1,0 +1,39 @@
+.Add-car{
+    border: none;
+    background-color: green;
+    color: white;
+    border-radius:8px;
+    padding: 10px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+    margin-right: 30px;
+  }
+div.modal-content {
+  border-radius: 1px;
+  margin-top: 50px;
+  width: 150%;
+  /* height: 800px; */
+}
+div.modal.show{
+  padding-right:200px;
+}
+div.modal-header {
+  border-bottom: none;
+}
+div.modal-footer {
+  border-top: none;
+}
+
+.btn.btn-primary {
+  --bs-btn-bg: green;
+  --bs-btn-border-color: green;
+  --bs-btn-hover-bg: rgb(3, 101, 3);
+  --bs-btn-hover-border-color: rgb(3, 101, 3);
+}
+.btn.btn-secondary {
+  --bs-btn-bg: rgb(146, 146, 146);
+  --bs-btn-border-color: rgb(146, 146, 146);
+}
+
+
