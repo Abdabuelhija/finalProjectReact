@@ -15,7 +15,7 @@ export default function LoginPage({setUser}) {
           name:bilal
         }
       );
-      navigate="/Home";
+      // navigate="/Home";
       alert("success");
     }
     else {

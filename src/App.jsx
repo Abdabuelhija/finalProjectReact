@@ -8,9 +8,6 @@ import ShoesPage from './ShoesPage/ShoesPage'
 import LoginPage from './LoginPage/LoginPage'
 function App() {
   const [user, setUser] = useState(null);
-  if (!user) {
-     return <Navigate to="/LoginPage" replace />;
-  }
   return (
       <>
         <div className='Nav'>
@@ -19,11 +16,9 @@ function App() {
         <div className='RoutesStyle'>
           <Routes>
             <Route path="/" element={<HomePage/>} />
-            <Route path="/Home" element={<HomePage/>} />
             <Route path="/ShoesPage" element={<ShoesPage/>}/ >
             <Route path="/ShoePage/:id" element={<ShoePage/>} />
-            <Route path="/LoginPage" element={<LoginPage setUser={setUser} />} />
-          </Routes>
+            <Route path="/Home" exact element={() => (!user ? <LoginPage setUser={setUser}/> : <Navigate to="/Home" />)} /></Routes>
         </div>
       </>
   )
