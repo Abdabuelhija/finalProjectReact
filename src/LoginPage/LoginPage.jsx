@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './LoginStyle.css';
 import Logo from '../GeneralStyles/Logo.png';
+import { useParams,useNavigate ,Link } from "react-router-dom";
 
 export default function LoginPage({setUser}) {
   document.title="Bilal Motors - Login";
   const [inputValue, setInputValue] = useState('');
+  const navigate =useNavigate();
   const handleFormSubmit = (event) => {
     event.preventDefault();
     if (inputValue === '1234') {
@@ -13,7 +15,8 @@ export default function LoginPage({setUser}) {
           name:bilal
         }
       );
-      
+      navigate="/Home";
+      alert("success");
     }
     else {
       alert("קוד שגוי , נסה שוב .");

@@ -1,17 +1,15 @@
 import './App.css'
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route ,Navigate,Link} from 'react-router-dom'
 import Navbar from './Navbar/NavPage'
 import HomePage from './HomePage/HomePage'
 import ShoePage from './ShoePage/ShoePage'
 import ShoesPage from './ShoesPage/ShoesPage'
 import LoginPage from './LoginPage/LoginPage'
-import { useParams,Navigate ,Link } from "react-router-dom";
-
 function App() {
   const [user, setUser] = useState(null);
   if (!user) {
-    // return (<Navigate to="/LoginPage" replace />);
+     return <Navigate to="/LoginPage" replace />;
   }
   return (
       <>
@@ -24,7 +22,7 @@ function App() {
             <Route path="/Home" element={<HomePage/>} />
             <Route path="/ShoesPage" element={<ShoesPage/>}/ >
             <Route path="/ShoePage/:id" element={<ShoePage/>} />
-            <Route path="/LoginPage" element={<LoginPage/>} />
+            <Route path="/LoginPage" element={<LoginPage setUser={setUser} />} />
           </Routes>
         </div>
       </>
