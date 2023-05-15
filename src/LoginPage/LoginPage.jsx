@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './LoginStyle.css';
 import Logo from '../GeneralStyles/Logo.png';
 import { useParams,useNavigate ,Link } from "react-router-dom";
-
 export default function LoginPage({setUser}) {
   document.title="Bilal Motors - Login";
   const [inputValue, setInputValue] = useState('');
@@ -12,11 +11,10 @@ export default function LoginPage({setUser}) {
     if (inputValue === '1234') {
       setUser(
         {
-          name:bilal
+          name:'bilal'
         }
       );
-      // navigate="/Home";
-      alert("success");
+      navigate("/Home");
     }
     else {
       alert("קוד שגוי , נסה שוב .");

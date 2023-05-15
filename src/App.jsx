@@ -10,15 +10,19 @@ function App() {
   const [user, setUser] = useState(null);
   return (
       <>
-        <div className='Nav'>
-          <Navbar/>
-        </div>
+      {user !=null && (
+          <div className='Nav'>
+            <Navbar/>
+          </div>
+        )}
         <div className='RoutesStyle'>
-          <Routes>
-            <Route path="/" element={<HomePage/>} />
-            <Route path="/ShoesPage" element={<ShoesPage/>}/ >
-            <Route path="/ShoePage/:id" element={<ShoePage/>} />
-            <Route path="/Home" exact element={() => (!user ? <LoginPage setUser={setUser}/> : <Navigate to="/Home" />)} /></Routes>
+        <Routes>
+            <Route path="/" element={user ? <HomePage/> : <Navigate to="/LoginPage" replace />} />
+            <Route path="/Home" element={user ? <HomePage/> : <Navigate to="/LoginPage" replace />}  />
+            <Route path="/ShoesPage" element={user ? <ShoesPage/> : <Navigate to="/LoginPage" replace />} / >
+            <Route path="/ShoePage/:id" element={user ? <ShoePage/> : <Navigate to="/LoginPage" replace />}  />
+            <Route path="/LoginPage" element={<LoginPage setUser={setUser}/>}/>
+        </Routes>
         </div>
       </>
   )

@@ -18,9 +18,6 @@ export default function Navbar() {
             <li class="nav-item active">
               <Link to="/ShoesPage" class="nav-link">Shoes</Link>
             </li>
-            <li class="nav-item">
-              <Link to="/ShoesPage" class="nav-link" >Other</Link>
-            </li>
           </ul>
         </div>
         <Link to="/" class="nav-link ml-auto"style={{float:'right',marginRight:'30px'}}><img src={Logo} alt="Logo" className='NavLogo'/></Link>
