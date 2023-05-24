@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './ShoeStyle.css';
+import './CarProfileStyle.css';
 import { Modal, Button } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
-// import { useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +9,7 @@ import { faShekelSign } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-export default function ShoePage() {
+export default function CarProfile() {
   const { id } = useParams();
 const [Name, setName] = useState("");
 const [Color, setColor] = useState("");
@@ -50,9 +49,6 @@ useEffect(() => {
   }
   
   const handleShow1 = () => setShow1(true);
-
-
-
     const handleSubmit1 = async (event) => {
       event.preventDefault();
       const updatedData = {
@@ -101,7 +97,6 @@ useEffect(() => {
     };
     handleDelete();
   }
-
 
   return (
     <>

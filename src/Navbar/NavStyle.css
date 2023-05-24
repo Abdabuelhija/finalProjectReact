@@ -1,4 +1,12 @@
 .NavLogo{
 width:70px;
 }
+.navbar.navbar-expand-lg.navbar-light.bg-dark
+{       
+    --bs-navbar-background: rgba(0, 0, 0, 0.9);
+    --bs-navbar-color: rgba(247, 247, 247, 0.9);
+    --bs-navbar-hover-color: rgb(255, 255, 255);
+    --bs-navbar-brand-color: rgba(255, 255, 255, 0.9);
+    --bs-navbar-brand-hover-color: rgb(255 255 255 / 100%);
+}
 

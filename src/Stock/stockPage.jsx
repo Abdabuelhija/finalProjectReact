@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ShoesStyle.css';
+import './stockStyle.css';
 import '../GeneralStyles/Card.css';
 import { Link, NavLink } from 'react-router-dom';
 import {  useRef } from 'react';
@@ -9,7 +9,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faShekelSign } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-export default function HomePage() {
+export default function Stock() {
   document.title="Abeds Shoes - All Shoes";
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -55,10 +55,9 @@ export default function HomePage() {
   }, []);
 
 
-  
   return (
     <>
-<Modal show={show} onHide={handleClose} animation={false}>
+  <Modal show={show} onHide={handleClose} animation={false}>
   <Modal.Header closeButton>
     <Modal.Title><br/><h1>Add Shoe</h1></Modal.Title>
   </Modal.Header>
@@ -98,31 +97,36 @@ export default function HomePage() {
     </Modal.Body>
   </Modal>
 
-      <h1>All The Shoes</h1>
-      <button class="Add-car" onClick={handleShow} ><FontAwesomeIcon icon={faPlus} style={{color: "#ffffff",}} /> Add Shoe </button>
-      <br/><br/><br/>
-        <div class="Cars">
-        {shoes.map((shoe) => (
-        <Link to={`/ShoePage/${shoe.ID}`} style={{ color: 'black', textDecoration: 'none' }}>
-          <div class="Shoecard">
-            <img className='Cardimg'
-              src={shoe.Img1}
-              alt={shoe.Name}
-            />
-            <div class="container">
-              <span className="ShoeName" style={{fontSize:'15px'}}>
-                <b>{shoe.Name}</b>
-              </span>
-              <span>
-                <b>Color : </b>{shoe.Color}
-              </span>
-              <span><b>Price : </b>{shoe.Price} <FontAwesomeIcon icon={faShekelSign} size="xs" /></span>
+      <div class="buttons">
+    <button class="orginal-button">סדר רגיל</button>
+    <button class="Entrance-button" onclick="func()">סדר לפי תאריך כניסה למגרש</button>
+    <button class="Entrance-button" onclick="func()">סדר לפי מחיר </button>
+    <button class="Add-car" onClick={handleShow} ><FontAwesomeIcon icon={faPlus} style={{color: "#ffffff",}} /> Add Car </button>
+    </div>
 
-            </div>
-          </div>
-        </Link>
-            ))}
+    <br/><br/><br/>
+    <div class="Cars">
+    {shoes.map((shoe) => (
+    <Link to={`/CarProfile/${shoe.ID}`} style={{ color: 'black', textDecoration: 'none' }}>
+      <div class="Shoecard">
+        <img className='Cardimg'
+          src={shoe.Img1}
+          alt={shoe.Name}
+        />
+        <div class="container">
+          <span className="ShoeName" style={{fontSize:'15px'}}>
+            <b>{shoe.Name}</b>
+          </span>
+          <span>
+            <b>Color : </b>{shoe.Color}
+          </span>
+          <span><b>Price : </b>{shoe.Price} <FontAwesomeIcon icon={faShekelSign} size="xs" /></span>
+
+        </div>
       </div>
+    </Link>
+        ))}
+  </div>
     </>
   );
 }

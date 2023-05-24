@@ -9,12 +9,12 @@ export default function LoginPage({setUser}) {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     if (inputValue === '1234') {
-      setUser(
-        {
-          name:'bilal'
-        }
-      );
-      navigate("/Home");
+      const user = {
+        name: 'bilal'
+      };
+      localStorage.setItem('user', JSON.stringify(user));
+      setUser(localStorage.getItem('user'));
+      navigate("/");
     }
     else {
       alert("קוד שגוי , נסה שוב .");
@@ -35,5 +35,3 @@ export default function LoginPage({setUser}) {
     </div>
   );
 }
-
-
