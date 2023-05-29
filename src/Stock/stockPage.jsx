@@ -16,15 +16,15 @@ export default function Stock() {
   const handleShow = () => setShow(true);
 
   // FormSubmit
-  const [CarNumber, setCarNumber] = useState("");
+  const [carNumber, setCarNumber] = useState("");
   const [Name, setName] = useState("");
   const [Year, setYear] = useState("");
   const [Hand, setHand] = useState(0);
   const [Capacity,setCapacity] = useState("");
   const [EntranceDate, setEntranceDate] = useState("");
-  const [isSold, setIsSold] = useState("false");
-  const [CustomerName, setCustomerName] = useState("null");
-  const [SellingDate,setSellingDate] = useState("null");
+  const [isSold, setIsSold] = useState(false);
+  const [CustomerName, setCustomerName] = useState(null);
+  const [SellingDate,setSellingDate] = useState(null);
   const [Notes, setNotes] = useState("");
   const [Img1, setImg1] = useState("");
   const [Img2, setImg2] = useState("");
@@ -34,7 +34,7 @@ export default function Stock() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const shoeData = {
-      CarNumber,
+      carNumber,
       Name,
       Year,
       Hand,
@@ -81,15 +81,15 @@ export default function Stock() {
     <form class="row" onSubmit={handleSubmit}>
       <div class="form-group col-md-6">
         <label for="inputEmail4">Name</label>
-        <input type="text" class="form-control" id="inputName" placeholder="Nike Air Force" onChange={(event) => setName(event.target.value)} required/>
+        <input type="text" class="form-control" id="inputName" placeholder="Mazda 3" onChange={(event) => setName(event.target.value)} required/>
       </div>
       <div class="form-group col-md-6">
         <label for="inputEmail4">Year</label>
-        <input type="text" class="form-control" id="inputYear" placeholder="White" onChange={(event) => setYear(event.target.value)} required/>
+        <input type="text" class="form-control" id="inputYear" placeholder="2023" onChange={(event) => setYear(event.target.value)} required/>
       </div>
       <div class="form-group col-md-6">
         <label for="inputEmail4">Hand</label>
-        <input type="number" class="form-control" id="inputHand" placeholder="700" onChange={(event) => setHand(event.target.value)} required/>
+        <input type="number" class="form-control" id="inputHand" placeholder="01" onChange={(event) => setHand(event.target.value)} required/>
       </div>
       <div class="form-group col-md-6">
         <label for="inputPassword4">Capacity</label>
@@ -109,7 +109,7 @@ export default function Stock() {
       </div>
       <div class="form-group col-md-6">
         <label for="inputEmail4">Car Number</label>
-        <input type="text" class="form-control" id="CarNumber" placeholder="Car Number" onChange={(event) => setCarNumber(event.target.value)} required/>
+        <input type="text" class="form-control" id="CarNumber" placeholder="12345234" onChange={(event) => setCarNumber(event.target.value)} required/>
       </div>
       <div class="form-group col-md-12">
         <label for="inputEmail4">Notes</label>
@@ -134,16 +134,16 @@ export default function Stock() {
   </Modal>
 
       <div class="buttons">
-    <button class="orginal-button">סדר רגיל</button>
-    <button class="Entrance-button" onclick="func()">סדר לפי תאריך כניסה למגרש</button>
-    <button class="Entrance-button" onclick="func()">סדר לפי מחיר </button>
+    <button class="orginal-button">All Stock Cars</button>
+    <button class="Entrance-button" onclick="func()">Filter By Entrance Date</button>
+    <button class="Entrance-button" onclick="func()">Filter By Price</button>
     <button class="Add-car" onClick={handleShow} ><FontAwesomeIcon icon={faPlus} style={{Year: "#ffffff",}} /> Add Car </button>
     </div>
 
     <br/><br/><br/>
     <div class="Cars">
     {cars.map((car) => (
-      <Link to={`/CarProfile/${car.ID}`} style={{ Year: 'black', textDecoration: 'none' }}>
+      <Link to={`/CarProfile/${car.id}`} style={{ color: 'black', textDecoration: 'none' }}>
         <div class="Shoecard">
           <img className='Cardimg' src={car.Img1} alt={car.Name}/>
           <div class="container">

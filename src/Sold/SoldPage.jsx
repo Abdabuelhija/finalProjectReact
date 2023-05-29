@@ -28,21 +28,18 @@ export default function SoldPage() {
       <br/><br/><br/>
         <div class="Cars">
         {shoes.map((car) => (
-        <Link to={`/CarProfile/${car.ID}`} style={{ color: 'black', textDecoration: 'none' }}>
-          <div class="Shoecard">
-            <img className='Cardimg'
-              src={car.Img1}
-              alt={car.Name}
-            />
-          <div class="container">
-            <span className="ShoeName" style={{fontSize:'15px'}}><b>{car.Name}</b></span>
-            <span><b>Year : </b>{car.Year}</span>
-            <span><b>hand : </b>{car.Hand} </span>
-            <span><b>Capacity : </b>{car.Capacity} </span>
-            <span><b>Km : </b>{car.Km}</span>
-          </div>
-          </div>
-        </Link>
+      <Link to={`/CarProfile/${car.id}`} style={{ color: 'black', textDecoration: 'none' }}>
+      <div class="Shoecard">
+        <img className='Cardimg' src={car.Img1} alt={car.Name}/>
+        <div class="container">
+          <span className="ShoeName" style={{fontSize:'15px'}}><b>{car.Name}</b></span>
+          <span><b>Year : </b>{car.Year}</span>
+          <span><b>hand : </b>{car.Hand} </span>
+          <span><b>Capacity : </b>{car.Capacity} </span>
+          <span><b>Km : </b>{car.Km}</span>
+        </div>
+      </div>
+    </Link>
             ))}
       </div>
     </>
