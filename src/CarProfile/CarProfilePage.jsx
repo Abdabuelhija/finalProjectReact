@@ -10,29 +10,44 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 export default function CarProfile() {
-  const { id } = useParams();
+const { id } = useParams();
 const [Name, setName] = useState("");
-const [Color, setColor] = useState("");
-const [Price, setPrice] = useState("");
-const [Sizes, setSizes] = useState("");
+const [Year, setYear] = useState("");
+const [Hand, setHand] = useState(0);
+const [Capacity,setCapacity] = useState("");
+const [EntranceDate, setEntranceDate] = useState("");
+const [isSold, setIsSold] = useState(false);
+const [CustomerName, setCustomerName] = useState("");
+const [SellingDate,setSellingDate] = useState("");
+const [Notes, setNotes] = useState("");
 const [Img1, setImg1] = useState("");
 const [Img2, setImg2] = useState("");
+const [Price, setPrice] = useState(0);
+const [Km,setKm] = useState(0);
+
 
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://6451781fa3221969116410b1.mockapi.io/Shoes', {
+      const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars', {
         params: { ID: id },
       });
       if (Object.keys(response.data).length !== 0) {
-        const shoe = response.data[0];
-        setName(shoe.Name);
-        setColor(shoe.Color);
-        setPrice(shoe.Price);
-        setSizes(shoe.Sizes);
-        setImg1(shoe.Img1);
-        setImg2(shoe.Img2);
-        document.title=`Abeds Shoes - ${shoe.Name}`;
+        const car = response.data[0];
+        setName(car.Name);
+        setYear(car.Year);
+        setHand(car.Hand);
+        setCapacity(car.Capacity);
+        setEntranceDate(car.EntranceDate);
+        setIsSold(car.isSold);
+        setCustomerName(car.CustomerName);
+        setSellingDate(car.SellingDate);
+        setNotes(car.Notes)
+        setImg1(car.Img1);
+        setImg2(car.Img2);
+        setPrice(car.Price);
+        setKm(car.Km);
+        document.title=`Bilal Motors - ${car.Name}`;
       }
     } catch (error) {
       console.log(error);
@@ -53,20 +68,28 @@ useEffect(() => {
       event.preventDefault();
       const updatedData = {
         Name: Name,
-        Color:Color ,
-        Price:Price ,
-        Sizes:Sizes ,
+        Year:Year ,
+        Hand:Hand,
+        Capacity:Capacity,
+        EntranceDate:EntranceDate,
+        isSold:isSold,
+        CustomerName:CustomerName,
+        SellingDate:SellingDate,
+        Notes:Notes,
         Img1:Img1 ,
-        Img2:Img2 
+        Img2:Img2,
+        Price:Price ,
+        Km:Km
       };
       try {
-        await axios.put(`https://6451781fa3221969116410b1.mockapi.io/Shoes/${id}`,updatedData);
+        await axios.put(`https://64620338491f9402f4b02aa1.mockapi.io/Cars/${id}`,updatedData);
         alert("The Changes were successfully saved");
         setShow1(false);
         window.location.reload();
       } catch (error) {
+        console.log(id);
         console.log(error);
-        alert("Error");
+        
       }
     }
       
@@ -84,10 +107,10 @@ useEffect(() => {
   };
 
   function deleteShoe(){
-    // Delete the Shoe here
+    // Delete the car here
     const handleDelete = async () => {
       try {
-        await axios.delete(`https://6451781fa3221969116410b1.mockapi.io/Shoes/${id}`);
+        await axios.delete(`https://64620338491f9402f4b02aa1.mockapi.io/Cars/${id}`);
         alert("The Changes were successfully saved");
         window.location.href = "../ShoesPage";
       } catch (error) {
@@ -108,32 +131,52 @@ useEffect(() => {
         <Modal.Body>
         <form class="row" onSubmit={handleSubmit1}>
       <div class="form-group col-md-6">
-      <label for="inputEmail4">Name</label>
+      <label for="inputName">Name</label>
       <input type="text" class="form-control" id="inputName" value={Name} onChange={(event) => setName(event.target.value)} required/>
       </div>
+
       <div class="form-group col-md-6">
-      <label for="inputEmail4">Color</label>
-        <input type="text" class="form-control" id="inputColor" value={Color} onChange={(event) => setColor(event.target.value)} required/>
+      <label for="inputYear">Year</label>
+        <input type="text" class="form-control" id="inputYear" value={Year} onChange={(event) => setYear(event.target.value)} required/>
       </div>
+
       <div class="form-group col-md-6">
-        <label for="inputEmail4">Price</label>
-        <input type="number" class="form-control" id="inputPrice"   value={Price} onChange={(event) => setPrice(event.target.value)} required/>
+        <label for="inputHand">Hand</label>
+        <input type="number" class="form-control" id="inputHand"   value={Hand} onChange={(event) => setHand(event.target.value)} required/>
       </div>
+
       <div class="form-group col-md-6">
-        <label for="inputPassword4">Sizes</label>
-        <input type="text" class="form-control" id="inputSizes"  value={Sizes} onChange={(event) => setSizes(event.target.value)} required/>
+        <label for="inputCapacity">Capacity</label>
+        <input type="text" class="form-control" id="inputCapacity"   value={Capacity} onChange={(event) => setCapacity(event.target.value)} required/>
+      </div>
+
+      <div class="form-group col-md-6">
+      <label for="inputKm">Km</label>
+      <input type="text" class="form-control" id="inputKm" value={Km} onChange={(event) => setKm(event.target.value)} required/>
+      </div>
+
+      <div class="form-group col-md-6">
+      <label for="inputPrice">Price</label>
+      <input type="text" class="form-control" id="inputPrice" value={Price} onChange={(event) => setPrice(event.target.value)} required/>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label for="inputNotes">Notes</label>
+        <input type="text" class="form-control" id="Notes"  value={Notes} onChange={(event) => setNotes(event.target.value)} required/>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label for="inputImg1">image1 url</label>
+        <input type="text" class="form-control" id="inputImg1"   value={Img1} onChange={(event) => setImg1(event.target.value)} required/>
       </div>
       <div class="form-group col-md-12">
-        <label for="inputAddress">image1 url</label>
-        <input type="text" class="form-control" id="Img1"   value={Img1} onChange={(event) => setImg1(event.target.value)} required/>
+        <label for="inputImg2">image2 url</label>
+        <input type="text" class="form-control" id="inputImg2"  value={Img2} onChange={(event) => setImg2(event.target.value)} required/>
       </div>
-      <div class="form-group col-md-12">
-        <label for="inputAddress">image2 url</label>
-        <input type="text" class="form-control" id="Img2"  value={Img2} onChange={(event) => setImg2(event.target.value)} required/>
-      </div>
+
         <Modal.Footer>
         <Button variant="secondary" onClick={handleClose1}>Close</Button>
-        <Button variant="primary"  type="submit" style={{'--bs-btn-bg': '#1C5F8C','--bs-btn-hover-bg':'#1C5F8C','--bs-btn-border-color': '#1C5F8C'}} >Update</Button>
+        <Button variant="primary"  type="submit" style={{'--bs-btn-bg': '#1C5F8C','--bs-btn-hover-bg':'#1C5F8C','--bs-btn-border-Year': '#1C5F8C'}} >Update</Button>
       </Modal.Footer>
     </form>
     </Modal.Body>
@@ -150,7 +193,7 @@ useEffect(() => {
           <Button variant="secondary" onClick={handleClose2}>
             Close
           </Button>
-          <Button variant="primary" onClick={deleteShoe} style={{'--bs-btn-bg':'red','--bs-btn-hover-bg':'red','--bs-btn-border-color':'red'}}>Delete</Button>
+          <Button variant="primary" onClick={deleteShoe} style={{'--bs-btn-bg':'red','--bs-btn-hover-bg':'red','--bs-btn-border-Year':'red'}}>Delete</Button>
         </Modal.Footer>
       </Modal>
 
@@ -165,13 +208,21 @@ useEffect(() => {
     </div>
     <div className="informations">
       <div className="Data">
-      <span><b>Color : </b>{Color}</span><br/>
-      <span><b> Sizes:</b> {Sizes}</span><br/>
+      <span><b>Year : </b>{Year}</span><br/>
+      <span><b> Hand:</b> {Hand}</span><br/>
+      <span><b>Capacity : </b>{Capacity}</span><br/>
+      <span><b> Km:</b> {Km}</span><br/>
+      <span><b> EntranceDate:</b> {EntranceDate}</span><br/>     
+      <span><b> Sold ? :</b> {isSold} </span><br/>    
+      <span><b> CustomerName:</b> {CustomerName}</span><br/>     
+      <span><b> SellingDate:</b> {SellingDate}</span><br/>     
       <span><b> Price:</b> {Price}<FontAwesomeIcon icon={faShekelSign} size="xs" /></span><br/>
+      <span><b> Notes:</b> {Notes}</span><br/>
+      
         <br/>
         <div className='Buttons'>
-      <button className="Delete-button" onClick={handleShow2}><FontAwesomeIcon icon={faTrash} style={{color: "#ffffff",}} /> Delete</button>
-      <button className="Update-button" onClick={handleShow1}><FontAwesomeIcon icon={faPenToSquare} style={{color: "#ffffff",}} /> Update</button>
+      <button className="Delete-button" onClick={handleShow2}><FontAwesomeIcon icon={faTrash} style={{Year: "#ffffff",}} /> Delete</button>
+      <button className="Update-button" onClick={handleShow1}><FontAwesomeIcon icon={faPenToSquare} style={{Year: "#ffffff",}} /> Update</button>
       </div>
       </div>
     </div>

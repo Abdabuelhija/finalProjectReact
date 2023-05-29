@@ -10,7 +10,7 @@
 .Shoecard {
     transition: 0.3s;
     width: 280px;
-    height: 400px;
+    height: 420px;
     background-color: rgb(252, 252, 252);
     border: 1px solid #d3d3d3;
     cursor: pointer;

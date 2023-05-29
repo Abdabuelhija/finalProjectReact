@@ -12,7 +12,7 @@ export default function SoldPage() {
   const [shoes, setShoes] = useState([]);
   useEffect(() => {
     async function fetchShoes() {
-      const response = await axios.get('https://6451781fa3221969116410b1.mockapi.io/Shoes');
+      const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
       setShoes(response.data);
     }
     fetchShoes();
@@ -27,23 +27,20 @@ export default function SoldPage() {
         </div>
       <br/><br/><br/>
         <div class="Cars">
-        {shoes.map((shoe) => (
-        <Link to={`/CarProfile/${shoe.ID}`} style={{ color: 'black', textDecoration: 'none' }}>
+        {shoes.map((car) => (
+        <Link to={`/CarProfile/${car.ID}`} style={{ color: 'black', textDecoration: 'none' }}>
           <div class="Shoecard">
             <img className='Cardimg'
-              src={shoe.Img1}
-              alt={shoe.Name}
+              src={car.Img1}
+              alt={car.Name}
             />
-            <div class="container">
-              <span className="ShoeName" style={{fontSize:'15px'}}>
-                <b>{shoe.Name}</b>
-              </span>
-              <span>
-                <b>Color : </b>{shoe.Color}
-              </span>
-              <span><b>Price : </b>{shoe.Price} <FontAwesomeIcon icon={faShekelSign} size="xs" /></span>
-
-            </div>
+          <div class="container">
+            <span className="ShoeName" style={{fontSize:'15px'}}><b>{car.Name}</b></span>
+            <span><b>Year : </b>{car.Year}</span>
+            <span><b>hand : </b>{car.Hand} </span>
+            <span><b>Capacity : </b>{car.Capacity} </span>
+            <span><b>Km : </b>{car.Km}</span>
+          </div>
           </div>
         </Link>
             ))}

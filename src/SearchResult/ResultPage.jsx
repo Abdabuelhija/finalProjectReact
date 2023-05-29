@@ -12,7 +12,7 @@ export default function ResultPage() {
   const [shoes, setShoes] = useState([]);
   useEffect(() => {
     async function fetchShoes() {
-      const response = await axios.get('https://6451781fa3221969116410b1.mockapi.io/Shoes');
+      const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
       setShoes(response.data);
     }
     fetchShoes();
