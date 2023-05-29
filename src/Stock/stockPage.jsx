@@ -11,11 +11,10 @@ import axios from 'axios';
 
 export default function Stock() {
   document.title="Abeds Shoes - All cars";
+  const [cars, setCars] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  // FormSubmit
   const [carNumber, setCarNumber] = useState("");
   const [Name, setName] = useState("");
   const [Year, setYear] = useState("");
@@ -60,19 +59,76 @@ export default function Stock() {
     }
   };
 
-  // to print the data
-  const [cars, setShoes] = useState([]);
   useEffect(() => {
-    async function fetchShoes() {
+    async function fetchCars() {
       const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
-      setShoes(response.data);
+      const StockCars = response.data.filter(car => !car.isSold);
+      setCars(StockCars);
     }
-    fetchShoes();
+    fetchCars();
   }, []);
 
+  const ShowAllCars = async (event) => {
+    event.preventDefault();
+    async function fetchCars() {
+      const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
+      const StockCars = response.data.filter(car => !car.isSold);
+      setCars(StockCars);
+    }
+    fetchCars();
+  }
+
+  const ShowByEntranceDate = async (event) => {
+    event.preventDefault();
+    async function fetchCars() {
+      const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
+      const StockCars = response.data.filter(car => !car.isSold);
+      const sortedData =StockCars.sort((a, b) => b.EntranceDate - a.EntranceDate); 
+      setCars(sortedData);
+    }
+    fetchCars();
+  }
+  
+
+  const ShowByPrice = async (event) => {
+    event.preventDefault();
+    async function fetchCars() {
+      const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
+      const StockCars = response.data.filter(car => !car.isSold);
+      const sortedData =StockCars.sort((a, b) => b.Price - a.Price); 
+      setCars(sortedData);
+    }
+    fetchCars();
+  }
+  
 
   return (
     <>
+      <div class="buttons">
+    <button class="orginal-button" onClick={ShowAllCars}>All</button>
+    <button class="Entrance-button" onClick={ShowByEntranceDate}>Filter By Entrance Date</button>
+    <button class="Entrance-button" onClick={ShowByPrice}>Filter By Price</button>
+    <button class="Add-car" onClick={handleShow} ><FontAwesomeIcon icon={faPlus} style={{Year: "#ffffff",}} /> Add Car </button>
+    </div>
+
+    <br/><br/><br/>
+    <div class="Cars">
+    {cars.map((car) => (
+      <Link to={`/CarProfile/${car.id}`} style={{ color: 'black', textDecoration: 'none' }}>
+        <div class="Shoecard">
+          <img className='Cardimg' src={car.Img1} alt={car.Name}/>
+          <div class="container">
+            <span className="ShoeName" style={{fontSize:'15px'}}><b>{car.Name}</b></span>
+            <span><b>Year : </b>{car.Year}</span>
+            <span><b>hand : </b>{car.Hand} </span>
+            <span><b>Capacity : </b>{car.Capacity} </span>
+            <span><b>Km : </b>{car.Km}</span>
+          </div>
+        </div>
+      </Link>
+    ))}
+  </div>
+
   <Modal show={show} onHide={handleClose} animation={false}>
   <Modal.Header closeButton>
     <Modal.Title><br/><h1>Add car</h1></Modal.Title>
@@ -132,31 +188,6 @@ export default function Stock() {
     </form>
     </Modal.Body>
   </Modal>
-
-      <div class="buttons">
-    <button class="orginal-button">All Stock Cars</button>
-    <button class="Entrance-button" onclick="func()">Filter By Entrance Date</button>
-    <button class="Entrance-button" onclick="func()">Filter By Price</button>
-    <button class="Add-car" onClick={handleShow} ><FontAwesomeIcon icon={faPlus} style={{Year: "#ffffff",}} /> Add Car </button>
-    </div>
-
-    <br/><br/><br/>
-    <div class="Cars">
-    {cars.map((car) => (
-      <Link to={`/CarProfile/${car.id}`} style={{ color: 'black', textDecoration: 'none' }}>
-        <div class="Shoecard">
-          <img className='Cardimg' src={car.Img1} alt={car.Name}/>
-          <div class="container">
-            <span className="ShoeName" style={{fontSize:'15px'}}><b>{car.Name}</b></span>
-            <span><b>Year : </b>{car.Year}</span>
-            <span><b>hand : </b>{car.Hand} </span>
-            <span><b>Capacity : </b>{car.Capacity} </span>
-            <span><b>Km : </b>{car.Km}</span>
-          </div>
-        </div>
-      </Link>
-    ))}
-  </div>
     </>
   );
 }

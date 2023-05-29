@@ -13,35 +13,49 @@ import Logo from '../GeneralStyles/Logo.png';
 
 export default function SearchPage() {
   document.title = "Bilal Motors - Sold";
+  const [cars, setCars] = useState([]);
   const [carNum, setCarNum] = React.useState("");
   const [carName, setCarName] = React.useState("");
   const [customer, setCustomer] = React.useState("");
 
-    // to print the data
-    const [shoes, setShoes] = useState([]);
-    useEffect(() => {
-      async function fetchShoes() {
-        const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
-        setShoes(response.data);
+
+  const Search = async (event) => {
+    event.preventDefault();
+    async function fetchCars() {
+      const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
+      let carsData = response.data;
+      if(carNum !== "") {
+        carsData = carsData.filter(car => car.carNumber.includes(carNum));
       }
-      fetchShoes();
-    }, []);
+      if(carName !== "") {
+        carsData = carsData.filter(car => car.Name.toLowerCase().includes(carName.toLowerCase()));
+      }
+      if(customer !== "") {
+        carsData = carsData.filter(car => car.CustomerName.toLowerCase().includes(customer.toLowerCase()));
+      }
+  
+      setCars(carsData);
+    }
+    fetchCars();
+  }
+  
+  
     
   return (
     <>
       <div className='searchGridBody'>
       <div className="SearchFormDiv"> 
       <h1 style={{textAlign:'left',marginLeft:'20px'}}> <FontAwesomeIcon icon={faBars} size='2xs'/> Search</h1>
-        <form method="post" className='SearchForm'>
-          <input type="text" placeholder='car ID' /><br/>
-          <input type="text"  placeholder='car name'/><br/>
-          <input type="text"  placeholder='customer name'/><br/>
+        <form method="post" className='SearchForm' onSubmit={Search}>
+          <input type="text" placeholder='car ID' onChange={(event) => setCarNum(event.target.value)} /><br/>
+          <input type="text"  placeholder='car name' onChange={(event) => setCarName(event.target.value)} /><br/>
+          <input type="text"  placeholder='customer name' onChange={(event) => setCustomer(event.target.value)}/><br/>
           <input type="submit" value="search" />
         </form>
       </div>
       <div className='ResultDiv'>
       <div class="Cars">
-    {shoes.map((car) => (
+    {cars.map((car) => (
       <Link to={`/CarProfile/${car.id}`} style={{ color: 'black', textDecoration: 'none' }}>
       <div class="Shoecard">
         <img className='Cardimg' src={car.Img1} alt={car.Name}/>

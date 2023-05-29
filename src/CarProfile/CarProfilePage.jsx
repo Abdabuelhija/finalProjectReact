@@ -227,7 +227,9 @@ export default function CarProfile() {
 
       <h1>{Name}</h1>
       <div className="Profile-body">
-        <div className="images">  <img className='Profileimg' src={Img1} /></div>
+        <div className="images">
+          <img className='Profileimg' src={Img1} />
+        </div>
         <div className="informations">
           <div className="Data">
             <span><b>Year : </b>{Year}</span><br />
@@ -262,7 +264,7 @@ export default function CarProfile() {
           </div>
         </div>
       </div>
-      <div className="insideImagesDiv">
+      <div className="insideImagesDiv" style={{marginTop:'20px'}}>
         <img src={Img2} style={{ width: '100%' }} />
       </div>
     </>

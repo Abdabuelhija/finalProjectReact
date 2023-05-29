@@ -7,27 +7,62 @@ import axios from 'axios';
 import { useParams,Navigate ,Link } from "react-router-dom";
 import LoginPage from '../LoginPage/LoginPage'
 export default function SoldPage() {
-  document.title="Abeds Shoes - Sold";
-  // to print the data
-  const [shoes, setShoes] = useState([]);
+  document.title="Abeds cars - Sold";
+  const [cars, setCars] = useState([]);
   useEffect(() => {
     async function fetchShoes() {
       const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
-      setShoes(response.data);
+      const SoldCars = response.data.filter(car => car.isSold);
+      setCars(SoldCars);
     }
     fetchShoes();
   }, []);
 
+  const ShowSoldCars = async (event) => {
+    event.preventDefault();
+    async function fetchCars() {
+      const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
+      const SoldCars = response.data.filter(car => car.isSold);
+      setCars(SoldCars);
+    }
+    fetchCars();
+  }
+  
+  const ShowByEntranceDate = async (event) => {
+    event.preventDefault();
+    async function fetchCars() {
+      const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
+      const soldCars = response.data.filter(car => car.isSold);
+      const sortedData =  soldCars.sort((a, b) => b.EntranceDate - a.EntranceDate); 
+      setCars(sortedData);
+    }
+    fetchCars();
+  }
+  
+  const ShowBySellingDate = async (event) => {
+    event.preventDefault();
+    async function fetchCars() {
+      const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
+      const soldCars = response.data.filter(car => car.isSold);
+      const sortedData = soldCars.sort((a, b) => new Date(b.SellingDate) - new Date(a.SellingDate));
+  
+      setCars(sortedData);
+    }
+    fetchCars();
+  }
+  
+
+
   return (
     <>
       <div class="buttons" >
-    <button class="orginal-button">סדר רגיל</button>
-    <button class="Entrance-button" onclick="func()">סדר לפי תאריך כניסה למגרש</button>
-    <button class="Entrance-button" onclick="func()">סדר לפי תאריך מכירה</button>
+    <button class="orginal-button" onClick={ShowSoldCars}>All</button>
+    <button class="Entrance-button" onClick={ShowByEntranceDate}>Filter By Entrance Date</button>
+    <button class="Entrance-button" onClick={ShowBySellingDate} >Filter By Sell Date</button>
         </div>
       <br/><br/><br/>
         <div class="Cars">
-        {shoes.map((car) => (
+        {cars.map((car) => (
       <Link to={`/CarProfile/${car.id}`} style={{ color: 'black', textDecoration: 'none' }}>
       <div class="Shoecard">
         <img className='Cardimg' src={car.Img1} alt={car.Name}/>
