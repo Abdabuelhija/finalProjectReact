@@ -7,15 +7,15 @@ import axios from 'axios';
 import { useParams,Navigate ,Link } from "react-router-dom";
 import LoginPage from '../LoginPage/LoginPage'
 export default function SoldPage() {
-  document.title="Abeds cars - Sold";
+  document.title="Bilal Motors - Sold";
   const [cars, setCars] = useState([]);
   useEffect(() => {
-    async function fetchShoes() {
+    async function fetchCars() {
       const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
       const SoldCars = response.data.filter(car => car.isSold);
       setCars(SoldCars);
     }
-    fetchShoes();
+    fetchCars();
   }, []);
 
   const ShowSoldCars = async (event) => {
@@ -64,10 +64,10 @@ export default function SoldPage() {
         <div class="Cars">
         {cars.map((car) => (
       <Link to={`/CarProfile/${car.id}`} style={{ color: 'black', textDecoration: 'none' }}>
-      <div class="Shoecard">
+      <div class="Carcard">
         <img className='Cardimg' src={car.Img1} alt={car.Name}/>
         <div class="container">
-          <span className="ShoeName" style={{fontSize:'15px'}}><b>{car.Name}</b></span>
+          <span className="CarName" style={{fontSize:'15px'}}><b>{car.Name}</b></span>
           <span><b>Year : </b>{car.Year}</span>
           <span><b>hand : </b>{car.Hand} </span>
           <span><b>Capacity : </b>{car.Capacity} </span>

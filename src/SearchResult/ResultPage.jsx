@@ -7,15 +7,15 @@ import axios from 'axios';
 import { useParams,Navigate ,Link } from "react-router-dom";
 import LoginPage from '../LoginPage/LoginPage'
 export default function ResultPage() {
-  document.title="Abeds Shoes - Result";
+  document.title="Bilal Motors - Result";
   // to print the data
-  const [shoes, setShoes] = useState([]);
+  const [cars, setCars] = useState([]);
   useEffect(() => {
-    async function fetchShoes() {
+    async function fetchCars() {
       const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
-      setShoes(response.data);
+      setCars(response.data);
     }
-    fetchShoes();
+    fetchCars();
   }, []);
 
   return (
@@ -28,21 +28,21 @@ export default function ResultPage() {
         </div>
       <br/><br/><br/>
         <div class="Cars">
-        {shoes.map((shoe) => (
-        <Link to={`/CarProfile/${shoe.ID}`} style={{ color: 'black', textDecoration: 'none' }}>
-          <div class="Shoecard">
+        {cars.map((car) => (
+        <Link to={`/CarProfile/${car.ID}`} style={{ color: 'black', textDecoration: 'none' }}>
+          <div class="Carcard">
             <img className='Cardimg'
-              src={shoe.Img1}
-              alt={shoe.Name}
+              src={car.Img1}
+              alt={car.Name}
             />
             <div class="container">
-              <span className="ShoeName" style={{fontSize:'15px'}}>
-                <b>{shoe.Name}</b>
+              <span className="CarName" style={{fontSize:'15px'}}>
+                <b>{car.Name}</b>
               </span>
               <span>
-                <b>Color : </b>{shoe.Color}
+                <b>Color : </b>{car.Color}
               </span>
-              <span><b>Price : </b>{shoe.Price} <FontAwesomeIcon icon={faShekelSign} size="xs" /></span>
+              <span><b>Price : </b>{car.Price} <FontAwesomeIcon icon={faShekelSign} size="xs" /></span>
 
             </div>
           </div>

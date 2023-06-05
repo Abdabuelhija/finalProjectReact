@@ -10,7 +10,7 @@ import { faShekelSign } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 export default function Stock() {
-  document.title="Abeds Shoes - All cars";
+  document.title="Bilal Motors - All cars";
   const [cars, setCars] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -115,10 +115,10 @@ export default function Stock() {
     <div class="Cars">
     {cars.map((car) => (
       <Link to={`/CarProfile/${car.id}`} style={{ color: 'black', textDecoration: 'none' }}>
-        <div class="Shoecard">
+        <div class="Carcard">
           <img className='Cardimg' src={car.Img1} alt={car.Name}/>
           <div class="container">
-            <span className="ShoeName" style={{fontSize:'15px'}}><b>{car.Name}</b></span>
+            <span className="CarName" style={{fontSize:'15px'}}><b>{car.Name}</b></span>
             <span><b>Year : </b>{car.Year}</span>
             <span><b>hand : </b>{car.Hand} </span>
             <span><b>Capacity : </b>{car.Capacity} </span>
