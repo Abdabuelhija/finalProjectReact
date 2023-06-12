@@ -12,7 +12,7 @@ import axios from 'axios';
 import Logo from '../GeneralStyles/Logo.png';
 
 export default function SearchPage() {
-  document.title = "Bilal Motors - Sold";
+  document.title = "Bilal Motors - Search";
   const [cars, setCars] = useState([]);
   const [carNum, setCarNum] = React.useState("");
   const [carName, setCarName] = React.useState("");

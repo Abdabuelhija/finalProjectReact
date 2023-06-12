@@ -8,5 +8,10 @@ width:70px;
     --bs-navbar-hover-color: rgb(255, 255, 255);
     --bs-navbar-brand-color: rgba(255, 255, 255, 0.9);
     --bs-navbar-brand-hover-color: rgb(255 255 255 / 100%);
+        flex-grow: 1;
 }
+.collapse:not(.show) {
+    display: flex;
+}
+
 

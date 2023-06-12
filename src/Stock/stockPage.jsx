@@ -13,7 +13,10 @@ export default function Stock() {
   document.title="Bilal Motors - All cars";
   const [cars, setCars] = useState([]);
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    window.location.reload();
+  }
   const handleShow = () => setShow(true);
   const [carNumber, setCarNumber] = useState("");
   const [Name, setName] = useState("");
@@ -29,6 +32,7 @@ export default function Stock() {
   const [Img2, setImg2] = useState("");
   const [Price, setPrice] = useState(0);
   const [Km,setKm] = useState(0);
+  const [Message, setMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,11 +55,11 @@ export default function Stock() {
     try {
       const response = await axios.post('https://64620338491f9402f4b02aa1.mockapi.io/Cars', shoeData);
       console.log(response.data); 
-      alert('New car inserted successfully');
-      setShow(false);
+      setMessage("New car inserted successfully");
+      // setShow(false);
     } catch (error) {
       console.error(error);
-      alert('Failed to insert new car');
+      setMessage("Failed to insert new car");
     }
   };
 
@@ -132,6 +136,8 @@ export default function Stock() {
   <Modal show={show} onHide={handleClose} animation={false}>
   <Modal.Header closeButton>
     <Modal.Title><br/><h1>Add car</h1></Modal.Title>
+    <br/>
+    {Message && <small style={{color:'green'}}>{Message}</small>}
   </Modal.Header>
   <Modal.Body>
     <form class="row" onSubmit={handleSubmit}>

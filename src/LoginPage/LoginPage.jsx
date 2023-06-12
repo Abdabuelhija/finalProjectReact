@@ -6,6 +6,7 @@ export default function LoginPage({setUser}) {
   document.title="Bilal Motors - Login";
   const [inputValue, setInputValue] = useState('');
   const navigate =useNavigate();
+  const [Message, setMessage] = useState("");
   const handleFormSubmit = (event) => {
     event.preventDefault();
     if (inputValue === '1234') {
@@ -17,7 +18,7 @@ export default function LoginPage({setUser}) {
       navigate("/");
     }
     else {
-      alert("קוד שגוי , נסה שוב .");
+      setMessage("Wrong password");
     }
   };
   return (
@@ -25,6 +26,7 @@ export default function LoginPage({setUser}) {
       <div className='FormDiv'>
         <h1>Login</h1>
         <small>The temporary code is : 1234</small>
+        {Message && <small style={{color:'green'}}>{Message}</small>}
         <form onSubmit={handleFormSubmit}>
           <label style={{ fontSize: '30px', color: '#702C77', fontWeight: 'bold' }}>Code</label>
           <br />

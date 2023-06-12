@@ -25,6 +25,7 @@ export default function CarProfile() {
   const [Img2, setImg2] = useState("");
   const [Price, setPrice] = useState(0);
   const [Km, setKm] = useState(0);
+  const [Message, setMessage] = useState("");
 
 
   useEffect(() => {
@@ -86,9 +87,7 @@ export default function CarProfile() {
     };
     try {
       await axios.put(`https://64620338491f9402f4b02aa1.mockapi.io/Cars/${id}`, updatedData);
-      alert("The Changes were successfully saved");
-      setShow1(false);
-      window.location.reload();
+      setMessage("The changes were successfully saved.");
     } catch (error) {
       console.log(id);
       console.log(error);
@@ -100,7 +99,10 @@ export default function CarProfile() {
 
   {/* Delete Modal */ }
   const [show2, setShow2] = useState(false);
-  const handleClose2 = () => setShow2(false);
+  const handleClose2 = () => {
+    setShow2(false);
+    window.location.reload();
+  }
   const handleShow2 = () => setShow2(true);
 
   {/* Delete submit */ }
@@ -124,9 +126,7 @@ export default function CarProfile() {
     };
     try {
       await axios.put(`https://64620338491f9402f4b02aa1.mockapi.io/Cars/${id}`, updatedData);
-      alert("The Changes were successfully saved");
-      setShow2(false);
-      window.location.reload();
+      setMessage("The changes were successfully saved.");
     } catch (error) {
       console.log(error);
 
@@ -139,6 +139,8 @@ export default function CarProfile() {
       <Modal show={show1} onHide={handleClose1} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title><br /><h2>Update Informations</h2></Modal.Title>
+          <br/>
+          {Message && <small style={{color:'green'}}>{Message}</small>}
         </Modal.Header>
         <Modal.Body>
           <form class="row" onSubmit={handleSubmit1}>
@@ -203,6 +205,8 @@ export default function CarProfile() {
       <Modal show={show2} onHide={handleClose2} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Informations</Modal.Title>
+          <br/>
+          {Message && <small style={{color:'red'}}>{Message}</small>}
         </Modal.Header>
         <Modal.Body>
           <form class="row" onSubmit={handleSubmit2}>
