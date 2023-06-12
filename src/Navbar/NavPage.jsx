@@ -1,55 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../GeneralStyles/Logo.png';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import './NavStyle.css';
+
+import {
+  MDBContainer,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarToggler,
+  MDBNavbarNav,
+  MDBNavbarItem,
+  MDBNavbarLink,
+  MDBCollapse
+} from 'mdb-react-ui-kit';
 
 export default function Navbar({ setUser }) {
   const handleLogout = () => {
     localStorage.removeItem('user');
     setUser(localStorage.getItem('user'));
   };
-
+  const [showNav, setShowNav] = useState(false);
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-      <Link to="/Stock" className="navbar-brand" style={{ marginLeft: '10px' }}>
-        Stock
-      </Link>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <Link to="/Sold" className="nav-link">
-              Sold
-            </Link>
-          </li>
-          <li className="nav-item active">
-            <Link to="/Search" className="nav-link">
-              <FontAwesomeIcon icon={faMagnifyingGlass} /> Search
-            </Link>
-          </li>
-          <li className="nav-item active">
-            <Link to="/LoginPage" className="nav-link" onClick={handleLogout}>
-              <FontAwesomeIcon icon={faRightFromBracket} /> Logout
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <Link to="/" className="nav-link ml-auto" style={{ float: 'right', marginRight: '30px' }}>
-        <img src={Logo} alt="Logo" className="NavLogo" />
-      </Link>
-    </nav>
+    <MDBNavbar expand='lg' light bgColor='dark'>
+      <MDBContainer fluid>
+        <MDBNavbarBrand href="/Stock" style={{color:'white'}}>Stock</MDBNavbarBrand>
+        <MDBNavbarToggler
+          type='button'
+          aria-expanded='false'
+          aria-label='Toggle navigation'
+          onClick={() => setShowNav(!showNav)}
+        >
+          <FontAwesomeIcon icon={faBars} size='1x' style={{color:'white'}}/>
+        </MDBNavbarToggler>
+        <MDBCollapse navbar show={showNav}>
+          <MDBNavbarNav>
+            <MDBNavbarItem>
+              <MDBNavbarLink href="/Sold" style={{color:'white'}}>Sold</MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <MDBNavbarLink href='/Search' style={{color:'white'}}> <FontAwesomeIcon icon={faMagnifyingGlass} /> Search</MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <MDBNavbarLink onClick={handleLogout} href='/Search' style={{color:'white'}}> <FontAwesomeIcon icon={faRightFromBracket} /> Logout</MDBNavbarLink>
+            </MDBNavbarItem>
+          </MDBNavbarNav>
+        </MDBCollapse>
+        <MDBNavbarLink href='/' style={{color:'white'}}> <img src={Logo} alt="Logo" className="NavLogo" /></MDBNavbarLink>
+      </MDBContainer>
+    </MDBNavbar>
   );
 }
