@@ -87,7 +87,7 @@ export default function Stock() {
     async function fetchCars() {
       const response = await axios.get('https://64620338491f9402f4b02aa1.mockapi.io/Cars');
       const StockCars = response.data.filter(car => !car.isSold);
-      const sortedData =StockCars.sort((a, b) => b.EntranceDate - a.EntranceDate); 
+      const sortedData =StockCars.sort((a, b) =>  new Date(b.EntranceDate) -  new Date(a.EntranceDate)); 
       setCars(sortedData);
     }
     fetchCars();
